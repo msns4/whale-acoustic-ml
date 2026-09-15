@@ -74,3 +74,24 @@ Future improvements could include larger datasets, log-Mel spectrogram features,
 ## ⚠️ Limitations
 
 This is an exploratory project based on only 11 source recordings. Multiple 5-second segments originate from the same recordings, so the 62 segments should not be treated as 62 independent biological samples.
+
+
+
+## 📦 Dataset
+
+Whale vocalization recordings used in this project were obtained from the
+**NOAA Fisheries Whale Sound Records dataset** available on Kaggle.
+
+Dataset source: [Whale Sounds Dataset on Kaggle](https://www.kaggle.com/datasets/asimmahmudov/whale-sounds-dataset)
+
+The audio files are not included in this repository.
+
+
+
+## ▶️ How to Run
+
+1. Download the whale audio dataset.
+2. Upload the WAV recordings to Google Colab.
+3. Open `whale_acoustics.ipynb`.
+4. Install the required Python libraries.
+5. Run the notebook cells in order.

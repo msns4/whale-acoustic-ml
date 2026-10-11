@@ -1,97 +1,124 @@
-# 🐋 Whale Acoustic ML
+# 🐋 Sperm Whale Coda Communication Analysis
 
-### Unsupervised Machine Learning for Exploring Whale Vocalizations
+## Acoustic Structure, Turn-Taking, and Sequential Response Patterns
 
-This project explores whether unsupervised machine learning can identify acoustic patterns in whale vocalization recordings using audio signal processing and machine learning.
+This repository contains an independent computational research project investigating structure in sperm whale communication.
 
-Whale recordings are transformed into MFCC acoustic features and analyzed using K-Means clustering, Silhouette Analysis, and PCA.
+The study examines two related questions:
 
-## 🔬 Research Question
+1. How reliably can selected sperm whale coda types be distinguished from their rhythm and tempo?
+2. Does the type of coda produced by one whale depend on the coda immediately produced by another whale during social exchanges?
 
-**Can unsupervised machine learning identify meaningful acoustic structure in whale vocalization recordings based only on their acoustic features?**
+The analysis combines acoustic feature representation, unsupervised clustering, supervised classification, dialogue timing analysis, and permutation testing.
 
-## ⚙️ Pipeline
+---
 
-Whale Audio  
-↓  
-Resampling to 22,050 Hz  
-↓  
-5-second Segmentation  
-↓  
-13 MFCC Features  
-↓  
-Feature Standardization  
-↓  
-K-Means Clustering  
-↓  
-Silhouette Analysis  
-↓  
-PCA Visualization
+## Research Overview
 
-## 📊 Key Results
+Sperm whales communicate using short sequences of clicks known as **codas**.
 
-- 11 source whale recordings were analyzed.
-- The recordings produced 62 five-second audio segments.
-- Initial clustering achieved a Silhouette Score of **0.621**.
-- After normalizing the sample rate, the strongest two-cluster solution achieved **0.603**.
-- The pilot whale recording was identified as a strong acoustic outlier.
-- After removing this recording for an additional exploratory analysis, the remaining 57 segments produced a three-cluster solution with a Silhouette Score of **0.574**.
-- PCA visualization showed visible acoustic separation between the resulting groups.
+This project focuses on four 5-click coda types:
 
-### PCA Visualization
+- `1+1+3`
+- `2+3`
+- `5R1`
+- `5R2`
 
-The PCA projection below visualizes the acoustic separation between the three clusters identified in the exploratory analysis.
+Each coda was represented using:
 
-<img width="2534" height="1869" alt="pca_whale_clusters" src="https://github.com/user-attachments/assets/0dec5311-6a5d-4f71-8914-c1a975f4d96f" />
+- four normalized inter-click intervals (rhythm)
+- total coda duration (tempo)
 
+The analysis then extended from individual codas to temporally ordered dialogue events between whales.
 
+---
 
-## 🧠 Interpretation
+## Key Results
 
-The results suggest that MFCC-based unsupervised learning can detect acoustic differences within this small collection of whale recordings.
+- Four selected coda types showed reproducible acoustic differences in rhythm and tempo.
+- Grouped cross-validation produced a mean balanced classification accuracy of approximately **0.997**.
+- Speaker-change transitions occurred after substantially shorter gaps than same-speaker continuations.
+- Cross-speaker response coda type was associated with the preceding coda type more strongly than expected from local whale repertoires alone.
+- The observed mutual information was approximately **0.195**, compared with a permutation-null mean of approximately **0.120**.
+- The permutation test produced **p ≈ 0.0002**.
+- The strongest enriched transitions were concentrated within the **5R coda family**, particularly:
+  - `5R1 → 5R2`
+  - `5R2 → 5R1`
+  - `5R2 → 5R2`
 
-However, the clusters should **not** be interpreted as whale language, behavior, or specific call types. Differences may reflect species, recording conditions, background noise, equipment, or other acoustic factors.
+These results do **not** establish the semantic meaning of individual codas. Instead, they identify reproducible interaction patterns that may help guide future behavioral studies of sperm whale communication.
 
-## 🛠 Technologies
+---
 
-- Python
-- Librosa
-- NumPy
-- Pandas
-- Matplotlib
-- Scikit-learn
+## Methods
 
-## 📁 Repository
+The project includes:
 
-- `whale_acoustics.ipynb` — complete analysis and experiments
-- `whale_clustering_results.csv` — final clustering results
-- `README.md` — project overview
+- normalized inter-click interval analysis
+- coda-duration analysis
+- K-means clustering
+- silhouette score
+- Adjusted Rand Index (ARI)
+- Normalized Mutual Information (NMI)
+- logistic regression classification
+- Stratified Group K-Fold cross-validation
+- turn-taking timing analysis
+- Wilcoxon signed-rank testing
+- mutual-information permutation testing
+- Benjamini-Hochberg FDR correction
+- robustness analysis across response windows, recordings, and whale-pair contexts
 
-## 🚀 Future Work
+---
 
-Future improvements could include larger datasets, log-Mel spectrogram features, alternative clustering algorithms, and supervised classification using labeled whale recordings.
+## Repository Structure
 
-## ⚠️ Limitations
+- `Phase_2_Sperm_Whale_Codas_RESEARCH.ipynb` — main research notebook
+- `figures/` — figures used in the research paper
+- `whale_acoustics.ipynb` — earlier pilot study using whale audio recordings
+- `whale_clustering_results.csv` — results from the earlier pilot analysis
 
-This is an exploratory project based on only 11 source recordings. Multiple 5-second segments originate from the same recordings, so the 62 segments should not be treated as 62 independent biological samples.
+---
 
+## Data
 
+The Phase 2 analysis uses two publicly available datasets:
 
-## 📦 Dataset
+- `DominicaCodas.csv`
+- `sperm-whale-dialogues.csv`
 
-Whale vocalization recordings used in this project were obtained from the
-**NOAA Fisheries Whale Sound Records dataset** available on Kaggle.
+Both are available in the official companion repository for:
 
-Dataset source: [Whale Sounds Dataset on Kaggle](https://www.kaggle.com/datasets/asimmahmudov/whale-sounds-dataset)
+Sharma et al. (2024), *Contextual and Combinatorial Structure in Sperm Whale Vocalisations*.
 
-The audio files are not included in this repository.
+Dataset and original code:
+https://github.com/pratyushasharma/sw-combinatoriality
 
+No new acoustic recordings were collected for this study.
 
+---
 
-## ▶️ How to Run
+## Figures
 
-1. Download the whale audio dataset.
-2. Upload the WAV recordings to Google Colab.
-3. Open `whale_acoustics.ipynb`.
-4. Install the required Python libraries.
-5. Run the notebook cells in order.
+The `figures/` directory contains the main visualizations used in the research paper:
+
+1. Duration distributions of selected coda types
+2. Mean rhythmic profiles
+3. Clustering performance
+4. Turn-taking timing distributions
+5. Permutation test for sequential dependence
+6. Cross-speaker coda transition probabilities
+
+---
+
+## Limitations
+
+The dialogue coda labels were predicted rather than manually annotated, and the sequential analysis focused on only four selected 5-click coda types.
+
+Non-random sequential association should not be interpreted as semantic translation. Behavioral and social context would be required to investigate the communicative function of individual codas.
+
+---
+
+## Author
+
+**Mansur Gapar**  
+Independent Research Project, 2026

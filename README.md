@@ -11,6 +11,10 @@ The study examines two related questions:
 
 The analysis combines acoustic feature representation, unsupervised clustering, supervised classification, dialogue timing analysis, and permutation testing.
 
+## 📄 Research Paper
+
+[Read the full research paper (PDF)](paper/Sperm_Whale_Coda_Communication_Research.pdf)
+
 ---
 
 ## Research Overview

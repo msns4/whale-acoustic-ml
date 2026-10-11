@@ -15,6 +15,8 @@ The analysis combines acoustic feature representation, unsupervised clustering, 
 
 [Read the full research paper (PDF)](paper/Sperm_Whale_Coda_Communication_Research.pdf)
 
+**Published preprint (Zenodo, v1.0):** [10.5281/zenodo.23298922](https://doi.org/10.5281/zenodo.23298922)
+
 ---
 
 ## Research Overview
